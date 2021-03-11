@@ -1,0 +1,174 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>SDN Dashboard - Introduction</title>
+{% endblock %}
+
+{% block body %}
+<!-- Page Wrapper -->
+<div id="wrapper">
+  <!-- Sidebar -->
+  <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+      <div class="sidebar-brand-icon">
+        <i class="fas fa-cogs"></i>
+      </div>
+      <div class="sidebar-brand-text mx-3">CSD</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0" />
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item active">
+      <a class="nav-link" href="/">
+        <i class="fas fa-fw fa-file-alt"></i>
+        <span>Introduction</span></a>
+    </li>
+
+    <!-- Nav Item - Charts -->
+    <!-- <li class="nav-item">
+      <a class="nav-link" href="/topology">
+        <i class="fas fa-fw fa-project-diagram"></i>
+        <span>Topology</span></a>
+    </li> -->
+
+    <!-- Nav Item - Tables -->
+    <li class="nav-item">
+      <a class="nav-link" href="/statistics">
+        <i class="fas fa-fw fa-chart-bar"></i>
+        <span>Statistics</span></a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="http://localhost:3000" target="_blank">
+        <i class="fas fa-fw fa-chart-line"></i>
+        <span>Grafana</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block" />
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+      <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+  </ul>
+  <!-- End of Sidebar -->
+
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+    <!-- Main Content -->
+    <div id="content">
+      <!-- Topbar -->
+      <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <h1 class="h3 mx-2 mb-0 text-gray-800">
+          Distributed Monitoring as a Service for Software-Defined Networking
+        </h1>
+      </nav>
+      <!-- End of Topbar -->
+
+      <!-- Begin Page Content -->
+      <div class="container-fluid">
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">Introduction</h1>
+        <p class="mb-4">
+          You can find the project Github repo at
+          <a href="https://gits-15.sys.kth.se/zhwa/ik2200-csd" target="_blank">here</a>.
+          <span class="icon">
+            <i class="fab fa-github"></i>
+          </span>
+        </p>
+
+        <!-- Content Row -->
+        <div class="row">
+          <!-- Content Column -->
+
+          <div class="col-lg-4 mb-4">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Members</h6>
+              </div>
+              <div class="card-body">
+                <ul>
+                  <li>
+                    Xiaoyi Wei &lt;<a href="mailto:xiaoyiwe@kth.se">xiaoyiwe@kth.se</a>&gt;
+                  </li>
+                  <li>
+                    Chenhui Xu &lt;<a href="mailto:chenhui@kth.se">chenhui@kth.se</a>&gt;
+                  </li>
+                  <li>
+                    Erfan Wu &lt;<a href="mailto:erfanw@kth.se">erfanw@kth.se</a>&gt;
+                  </li>
+                  <li>
+                    Zhe Wang &lt;<a href="mailto:tangjia@kth.se">tangjia@kth.se</a>&gt;
+                  </li>
+                  <li>
+                    Tangjia Zhou &lt;<a href="mailto:zhwa@kth.se">zhwa@kth.se</a>&gt;
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Approach -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">
+                  Project Overview
+                </h6>
+              </div>
+              <div class="card-body">
+                <p>
+                  Software-defined Networking (SDN) is a novel network
+                  architecture which centralizes network intelligence by
+                  decoupling control plane from data plane. SDN makes it
+                  possible to manage networks using softwares, allowing
+                  reconfiguration in an easier and more flexible way without
+                  modifying the hardware equipments. This also enhances network
+                  performance and monitoring capacities. This project pushes
+                  forward in the scale of monitoring in SDN, aiming at capturing
+                  more information from data plane in order to realize admission
+                  control and adaptive routing which help achieve 100% link
+                  utilization under heavy load.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Content Column -->
+
+          <div class="col-lg-8 mb-4">
+            <!-- Illustrations -->
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Team Matrix</h6>
+              </div>
+              <div class="card-body">
+                <div class="text-center">
+                  <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 60rem"
+                    src="{{ url_for('static', filename='img/matrix.png') }}" alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- /.container-fluid -->
+    </div>
+    <!-- End of Main Content -->
+
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+      <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+          <span>Copyright &copy; CSD-SDN 2020</span>
+        </div>
+      </div>
+    </footer>
+    <!-- End of Footer -->
+  </div>
+  <!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
+{% endblock %}

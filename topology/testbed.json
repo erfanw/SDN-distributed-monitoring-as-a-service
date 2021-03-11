@@ -1,0 +1,70 @@
+{
+    "topo_info":{
+
+        "links" : [ 
+
+            ["client0", "oz1", {"delay" : "1ms", "bw" : 10}], 
+            ["client1", "oz1", {"delay" : "1ms", "bw" : 10}],
+            ["client2", "oz2", {"delay" : "1ms", "bw" : 10}], 
+            ["client3", "oz2", {"delay" : "1ms", "bw" : 10}],
+            ["server0", "oz3", {"delay" : "1ms", "bw" : 10}],
+            ["server1", "oz3", {"delay" : "1ms", "bw" : 10}], 
+            ["server2", "oz4", {"delay" : "1ms", "bw" : 10}],
+            ["server3", "oz4", {"delay" : "1ms", "bw" : 10}], 
+
+            ["bb1", "bb2", {"delay" : "1ms", "bw" : 40}],
+            ["bb1", "s1", {"delay" : "1ms", "bw" : 20}],
+            ["bb1", "s2", {"delay" : "1ms", "bw" : 20}],
+            ["bb2", "s3", {"delay" : "1ms", "bw" : 20}],
+            ["bb2", "s4", {"delay" : "1ms", "bw" : 20}],
+
+            ["oz1", "s1", {"delay" : "1ms", "bw" : 10}],
+            ["oz1", "s2", {"delay" : "1ms", "bw" : 10}],
+
+            ["oz2", "s1", {"delay" : "1ms", "bw" : 10}],
+            ["oz2", "s2", {"delay" : "1ms", "bw" : 10}],
+
+            ["oz3", "s3", {"delay" : "1ms", "bw" : 10}],
+            ["oz3", "s4", {"delay" : "1ms", "bw" : 10}],
+
+            ["oz4", "s3", {"delay" : "1ms", "bw" : 10}],
+            ["oz4", "s4", {"delay" : "1ms", "bw" : 10}]
+
+        ], 
+
+        "hosts" : {
+            "client0": {"ip":"10.0.0.1", "mac":"00:00:0a:00:00:01"}, 
+            "client1": {"ip":"10.0.0.2", "mac":"00:00:0a:00:00:02"},
+            "client2": {"ip":"10.0.0.3", "mac":"00:00:0a:00:00:03"}, 
+            "client3": {"ip":"10.0.0.4", "mac":"00:00:0a:00:00:04"},
+            
+            "server0": {"ip":"10.0.0.7", "mac":"00:00:0a:00:00:07"}, 
+            "server1": {"ip":"10.0.0.8", "mac":"00:00:0a:00:00:08"},
+            "server2": {"ip":"10.0.0.9", "mac":"00:00:0a:00:00:09"}, 
+            "server3": {"ip":"10.0.0.10", "mac":"00:00:0a:00:00:0a"}
+    
+        }, 
+
+        "switches" : {
+            "bb1" : {"dpid" : "1"}, 
+            "bb2" : {"dpid" : "2"} ,
+
+            "s1" : {"dpid" : "3"} ,
+            "s2" : {"dpid" : "4"} ,
+            "s3" : {"dpid" : "5"} ,
+            "s4" : {"dpid" : "6"} ,
+
+            "oz1" : {"dpid" : "7"} ,
+            "oz2" : {"dpid" : "8"} ,
+            "oz3" : {"dpid" : "9"} ,
+            "oz4" : {"dpid" : "10"}
+        }
+    }, 
+
+    "controller_info" : {
+        "controller_name" : "c1", 
+        "controller_ip" : "127.0.0.1", 
+        "controller_port" : 6633
+    }
+
+}

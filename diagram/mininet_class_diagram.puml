@@ -1,0 +1,44 @@
+@startuml
+class Topo
+class Host
+class Switch 
+class Link 
+class RemoteController
+class Net 
+
+Net : Topo topo;  
+Net : RemoteController remoteController; 
+Net : __init__(Topo topo, RemoteController remoteController)
+
+Net *-- Topo
+Net *-- RemoteController
+
+RemoteController : str ip; 
+RemoteController : str port;  
+RemoteController : str name;  
+RemoteController : __init__(str ip, str port,str name)
+
+Topo : list<Host> Hosts
+Topo : list<Switch> Switches 
+Topo : list<Link> Links
+Topo : addHost(str host_name, str host_ip, str host_mac)
+Topo : addSwitch(str switch_name)
+Topo : addLink(str node1_name, str node2_name, ...)
+
+Topo *-- Host
+Topo *-- Switch
+Topo *-- Link
+Link o-- Host
+Link o-- Switch 
+
+Link : Tuple<node> nodes 
+Link : __init__(str node1, str node2)
+
+Host : str host_name;  
+Host : str host_ip; 
+Host : str host_mac;  
+Host : __init__(str host_name, str host_ip, str host_mac)
+
+Switch : str switch_name; 
+Switch : __init__(str switch_name)
+@enduml

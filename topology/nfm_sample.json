@@ -1,0 +1,31 @@
+{
+    "topo_info":{
+
+        "links" : [
+            ["client1", "s1", {"delay" : "1ms", "bw" : 1000}], 
+            ["client2", "s1", {"delay" : "1ms", "bw" : 1000}], 
+            ["server1", "s2", {"delay" : "1ms", "bw" : 1000}], 
+            ["server2", "s2", {"delay" : "1ms", "bw" : 1000}], 
+            ["s1", "s2", {"delay" : "1ms", "bw" : 100}]
+        ], 
+
+        "hosts" : {
+            "client1": {"ip":"10.0.0.1/24", "mac":"00:00:0a:00:00:01"},
+            "client2": {"ip":"10.0.0.2/24", "mac":"00:00:0a:00:00:02"},
+            "server1": {"ip":"10.0.0.3/24", "mac":"00:00:0a:00:00:03"},
+            "server2": {"ip":"10.0.0.4/24", "mac":"00:00:0a:00:00:04"}
+        }, 
+
+        "switches" : {
+            "s1" : {"dpid" : "1"},
+            "s2" : {"dpid" : "2"}
+        }
+    }, 
+
+    "controller_info" : {
+        "controller_name" : "c1", 
+        "controller_ip" : "127.0.0.1", 
+        "controller_port" : 6633
+    }
+
+}

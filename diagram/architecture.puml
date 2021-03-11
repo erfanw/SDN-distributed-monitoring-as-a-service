@@ -1,0 +1,9 @@
+@startuml
+component StatsCollector 
+component TopologyDiscovery
+component Events
+component DMAPI 
+component SimpleSwitch
+
+
+@enduml

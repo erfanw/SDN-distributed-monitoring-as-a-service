@@ -1,0 +1,292 @@
+{% extends "base.html" %}
+
+{% block head %}
+<title>SDN Dashboard - Statistics</title>
+<script src="{{ url_for('static', filename='js/plotly-latest.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/d3.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/vis-network.min.js') }}"></script>
+
+<style type="text/css">
+  #mynetwork {
+      height: 600px;
+  }
+</style>
+{% endblock %}
+
+{% block body %}
+<!-- Page Wrapper -->
+<div id="wrapper">
+
+  <!-- Sidebar -->
+  <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+      <div class="sidebar-brand-icon">
+        <i class="fas fa-cogs"></i>
+      </div>
+      <div class="sidebar-brand-text mx-3">CSD</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+      <a class="nav-link" href="/">
+        <i class="fas fa-fw fa-file-alt"></i>
+        <span>Introduction</span></a>
+    </li>
+
+    <!-- Nav Item - Charts -->
+    <!-- <li class="nav-item active">
+      <a class="nav-link" href="/topology">
+        <i class="fas fa-fw fa-project-diagram"></i>
+        <span>Topology</span></a>
+    </li> -->
+
+    <!-- Nav Item - Tables -->
+    <li class="nav-item active">
+      <a class="nav-link" href="/statistics">
+        <i class="fas fa-fw fa-chart-bar"></i>
+        <span>Statistics</span></a>
+    </li>
+
+    <li class="nav-item">
+      <a class="nav-link" href="http://localhost:3000" target="_blank">
+        <i class="fas fa-fw fa-chart-line"></i>
+        <span>Grafana</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+      <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+  </ul>
+  <!-- End of Sidebar -->
+
+  <!-- Content Wrapper -->
+  <div id="content-wrapper" class="d-flex flex-column">
+
+    <!-- Main Content -->
+    <div id="content">
+
+      <!-- Topbar -->
+      <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+        <h1 class="h3 mx-2 mb-0 text-gray-800">Distributed Monitoring as a Service for Software-Defined Networking</h1>
+      </nav>
+      <!-- End of Topbar -->
+
+      <!-- Begin Page Content -->
+      <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-gray-800">Statistics</h1>
+        <p class="mb-4">This is the information of the network, including topology, link utilization, etc.</p>
+
+        <!-- Approach -->
+        <div class="row">
+          
+          <div class="col-xl-6">
+            <div class="card shadow mb-4">
+              <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Topology</h6>
+              </div>
+              <div class="card-body">
+                <div id="mynetwork"></div>
+                <script src="../static/js/topology.js"></script>
+                <hr>
+                <div class="mb-3">
+                  <div class="custom-control custom-switch custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" id="controllerSwitch">
+                    <label class="custom-control-label" for="controllerSwitch">Start Controller</label>
+                  </div>
+                  <div class="custom-control custom-switch custom-control-inline">
+                    <input type="checkbox" class="custom-control-input" id="mininetSwitch">
+                    <label class="custom-control-label" for="mininetSwitch">Start Mininet</label>
+                  </div>
+                </div>
+                <a href="javascript:void(0)" id="clearMininet" class="btn btn-danger btn-icon-split">
+                  <span class="icon text-white-50">
+                    <i class="far fa-trash-alt"></i>
+                  </span>
+                  <span class="text">Clear Mininet</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-6">
+
+            <div class="card shadow mb-4">
+
+              <a href="#collapseCardBoxplot" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                <h6 class="m-0 font-weight-bold text-primary">Overall Link Utilization</h6>
+              </a>
+
+              <div class="collapse show" id="collapseCardBoxplot">
+                <div class="card-body">  
+                
+                  <div class="chart" id="boxplot" width="100%"></div>
+                  <hr>
+  
+                  <div class="form-group col-2 pl-0">
+                    <label for="frequency-select">Frequency / s</label>
+                    <select class="form-control" id="frequency-select">
+                      <option>2</option>
+                      <option>4</option>
+                      <option selected>10</option>
+                      <option>20</option>
+                    </select>
+                  </div>
+  
+                  <a href="javascript:void(0)" id="btn-lu" class="btn btn-primary btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="fas fa-sync-alt"></i>
+                    </span>
+                    <span class="text">Refresh</span>
+                  </a>
+                  <a href="javascript:void(0)" id="clear-lu" class="btn btn-danger btn-icon-split">
+                    <span class="icon text-white-50">
+                      <i class="far fa-trash-alt"></i>
+                    </span>
+                    <span class="text">Clear</span>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="card shadow mb-4">
+
+              <a href="#collapseCardPerLink" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                <h6 class="m-0 font-weight-bold text-primary">Per-link Utilization</h6>
+              </a>
+
+              <div class="collapse show" id="collapseCardPerLink">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-bordered" id="statusTable" width="100%" cellspacing="0">
+                      <!-- table here -->
+                      <thead>
+                        <tr class="text-dark">
+                          <th>src dpid</th>
+                          <th>src port</th>
+                          <th>dst dpid</th>
+                          <th>dst port</th>
+                          <th>link utilization</th>
+                        </tr>
+                      </thead>
+                      <tbody></tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+      <!-- /.container-fluid -->
+
+    </div>
+    <!-- End of Main Content -->
+
+    <!-- Footer -->
+    <footer class="sticky-footer bg-white">
+      <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+          <span>Copyright &copy; CSD-SDN 2020</span>
+        </div>
+      </div>
+    </footer>
+    <!-- End of Footer -->
+
+  </div>
+  <!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<script src="{{ url_for('static', filename='js/jquery.dataTables.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/dataTables.bootstrap4.min.js') }}"></script>
+<script>
+  window.onload = function() {
+    $("#btn-lu").click()
+  }
+
+  $('#clearMininet').on('click', function() {
+    $.getJSON('/clear-mininet').then(
+      alert('Mininet Cleared!'),
+      $('#mininetSwitch').prop('disabled', false),
+      $('#mininetSwitch').prop('checked', false),
+      $('#controllerSwitch').prop('disabled', false),
+      $('#controllerSwitch').prop('checked', false)
+    )
+  })
+
+  $('#mininetSwitch').change(function() {
+    if (this.checked) {
+      $('#mininetSwitch').attr('disabled', true);
+      $.getJSON('/start-mininet');
+    }
+  })
+
+  $('#controllerSwitch').change(function() {
+    if (this.checked) {
+      $('#controllerSwitch').attr('disabled', true);
+      $.getJSON('/start-controller');
+    }
+  })
+  
+  $('#clear-lu').on('click', function() {
+    $.getJSON('/clear-db').then(
+      alert('Link Utilization Cleared!'),
+      $("#boxplot").empty()
+    )
+  })
+
+  $('#btn-lu').on('click', function() {
+    var freq = $("#frequency-select option:selected").text();
+    $.getJSON('/create-box/'+ freq, function(data) {
+      testBoxplot(data)
+    });
+  })
+
+  function testBoxplot(traces){
+    var layout = {
+      title: {
+        text: 'Link Utilization vs Time',
+        font: {size: 20}
+      },
+      xaxis: {
+        title: 'Time/s',
+      },
+      yaxis: {
+        title: 'Link Utilization'
+      }, 
+      margin: {
+        b: 80,
+        l: 80,
+        r: 80,
+        t: 100,
+        pad: 0,
+        autoexpand: true
+      },
+      boxgroupgap: 0.5,
+    }
+    var config = {
+      scrollZoom: true,
+      responsive: true
+    }
+    Plotly.newPlot('boxplot', traces, layout, config);
+  }
+</script>
+{% endblock %}

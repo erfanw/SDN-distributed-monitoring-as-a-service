@@ -1,0 +1,23 @@
+@startuml
+actor switch 
+actor database 
+boundary port_stats_requester 
+boundary port_stats_handler
+control monitor  
+entity port_stats_processor
+control db_api 
+
+activate monitor
+monitor -> port_stats_requester : periodically request port statistics 
+activate port_stats_requester
+port_stats_requester --> switch : send OPFPortStatsRequest
+switch -> port_stats_handler : send OPFPortStatsReply 
+activate port_stats_handler
+port_stats_handler --> port_stats_processor : forward stats for further process
+activate port_stats_processor 
+port_stats_processor --> db_api : push data to db 
+activate db_api
+db_api -> database
+
+
+@enduml
