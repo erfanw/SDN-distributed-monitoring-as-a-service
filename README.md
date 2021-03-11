@@ -1,4 +1,4 @@
-# ik2200-csd
+# SDN-distributed-monitoring-as-a-service
 
 This repository contains all the modules for the SDN project, including CPM, NFM, Topology, DM and the Web module.
 
